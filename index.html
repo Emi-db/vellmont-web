@@ -148,6 +148,9 @@ section[id]{scroll-margin-top:72px}
 .capturas{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
 .capturas .slot{aspect-ratio:9/16;scroll-snap-align:start;background:var(--wa);border-color:var(--wa-line)}
 .capturas .slot span{color:#5E5448}
+.capturas{align-items:start}
+.capturas figure{margin:0;scroll-snap-align:start}
+.capturas img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:var(--wa)}
 
 /* 5. testimonios por situación */
 .opiniones .wrap{display:flex;flex-direction:column;gap:20px}
@@ -337,6 +340,21 @@ footer .slot span{font-size:12px}
     </ul>
     <div class="problema-cierre">
       <p>Y no es que te bañes poco o que uses mal el desodorante. Hay gente que transpira más que otra, y en una camisa común <strong>se ve todo</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mensajes">
+  <div class="wrap sec">
+    <div class="mensajes-intro">
+      <h2>Lo que nos escriben</h2>
+      <p>Las subimos con permiso de cada uno.</p>
+    </div>
+    <div class="capturas" role="region" tabindex="0" aria-label="Capturas de mensajes de clientes (deslizá para ver más)">
+      <figure><img src="/media/whatsapp-1.jpg" width="540" height="720" loading="lazy" alt="Mensaje de WhatsApp: «Muy buenas las camisas amigo, no estoy todo el tiempo pensando en si transpiré o no. Hizo que esté más seguro y con más confianza, antes me daba vergüenza que hacían 20 grados y yo ya tenía la aureola bajo el brazo»."></figure>
+      <figure><img src="/media/whatsapp-2.jpg" width="540" height="810" loading="lazy" alt="Mensaje de WhatsApp: «Excelente! La calidad muy buena, y no se nota nada la transpiración. Probé todos los antitranspirantes que hay, la única solución fueron tus camisas»."></figure>
+      <figure><img src="/media/whatsapp-3.jpg" width="540" height="720" loading="lazy" alt="Mensaje de WhatsApp: «Excelente calidad! No se mancha y no se pasa nada de la transpiración»."></figure>
+      <figure><img src="/media/whatsapp-4.jpg" width="540" height="709" loading="lazy" alt="Mensaje de WhatsApp: «Quería contarte que me sirvió mucho! Dejé de estar pensando en la transpiración y estoy más seguro y más suelto»."></figure>
     </div>
   </div>
 </section>
