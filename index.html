@@ -140,6 +140,20 @@ section[id]{scroll-margin-top:72px}
 .video .nota-video b{font-size:12px;color:var(--ph-ink);background:var(--ph);padding:2px 7px;border-radius:4px}
 .video .nota-video span{font-size:13px;line-height:1.4}
 
+/* la diferencia (comparación) */
+.diferencia{background:var(--surface)}
+.diferencia .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:64px;row-gap:24px;align-items:center}
+.diferencia figure{margin:0;display:flex;flex-direction:column;gap:8px}
+.diferencia img{width:100%;height:auto;border-radius:14px;display:block}
+.diferencia figcaption,.foto-tela figcaption{font-size:13px;color:var(--muted)}
+.diferencia-texto{display:flex;flex-direction:column;gap:16px;max-width:46ch}
+.diferencia-texto > p{font-size:18px;color:var(--ink-2)}
+.diferencia-texto .btn{align-self:flex-start}
+.foto-tela{margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.foto-tela img{width:100%;height:auto;border-radius:14px}
+.cierre-foto{margin:8px 0 0;max-width:340px}
+.cierre-foto img{width:100%;height:auto;border-radius:14px;background:#fff;display:block}
+
 /* 4. lo que nos escriben */
 .mensajes{background:var(--surface)}
 .mensajes .wrap{display:flex;flex-direction:column;gap:24px}
@@ -259,6 +273,9 @@ footer .slot span{font-size:12px}
   .hero-media{max-width:320px}
   .talle .wrap{grid-template-columns:minmax(0,1fr);gap:28px}
   .problema .wrap{grid-template-columns:minmax(0,1fr);row-gap:28px}
+  .diferencia .wrap{grid-template-columns:minmax(0,1fr)}
+  .diferencia-texto{order:-1}
+  .cierre-foto{max-width:260px}
   .cierre .wrap{grid-template-columns:minmax(0,1fr);padding-block:64px}
   .hero .slot{aspect-ratio:4/3}
   .video{max-width:420px}
@@ -272,7 +289,7 @@ footer .slot span{font-size:12px}
   .hero .wrap{padding-block:20px 40px}
   .hero-head > p{font-size:17px}
   .hero-ctas{max-width:none}
-  .hero-ctas .btn,.cierre-ctas .btn{width:100%}
+  .hero-ctas .btn,.cierre-ctas .btn,.diferencia-texto .btn{width:100%}
   .hero-ctas .nota-cta{text-align:center;padding-left:0}
   .situaciones li{grid-template-columns:minmax(0,1fr);gap:6px;padding:18px 0}
   .campos{grid-template-columns:minmax(0,1fr)}
@@ -345,6 +362,21 @@ footer .slot span{font-size:12px}
   </div>
 </section>
 
+<section class="diferencia">
+  <div class="wrap sec">
+    <figure>
+      <img src="/media/comparacion.jpg" srcset="/media/comparacion-600.jpg 600w, /media/comparacion.jpg 900w" sizes="(max-width: 900px) 100vw, 560px" width="900" height="900" loading="lazy" alt="A la izquierda, un hombre con camisa celeste común levanta el brazo y se le ve la mancha de transpiración en la axila. A la derecha, el mismo gesto con la camisa Vellmont, sin marca.">
+      <figcaption>Imagen ilustrativa.</figcaption>
+    </figure>
+    <div class="diferencia-texto">
+      <h2>Levantá el brazo tranquilo</h2>
+      <p>En una camisa común la transpiración se mete en la tela y aparece la aureola. La tela de Vellmont no la absorbe, así que la camisa se ve igual a la mañana que a la tarde.</p>
+      <a class="btn" href="#" data-link="shop" data-cta="diferencia">Comprar ahora · $99.000</a>
+      <p class="nota-cta">3 cuotas sin interés · 15% off por transferencia</p>
+    </div>
+  </div>
+</section>
+
 <section class="mensajes">
   <div class="wrap sec">
     <div class="mensajes-intro">
@@ -367,6 +399,9 @@ footer .slot span{font-size:12px}
     <div class="prueba-texto">
       <h2>Lo que hace la tela</h2>
       <p>Diseñada para el ritmo del día a día, esta camisa combina elegancia minimalista con tecnología de alto rendimiento. Confeccionada con fibras de caña de bambú y Tecnología DWR. Repelen el agua, por lo tanto no se marca la transpiración, y las fibras de bambú aportan una sensación suave y liviana al contacto con la piel.</p>
+      <figure class="foto-tela">
+        <img src="/media/calidad.jpg" srcset="/media/calidad-600.jpg 600w, /media/calidad.jpg 900w" sizes="(max-width: 900px) 100vw, 520px" width="900" height="900" loading="lazy" alt="Detalle del cuello de la camisa celeste puesta: cuello firme, costuras prolijas y tela suave de fibra de bambú.">
+      </figure>
     </div>
     <div class="tela">
       <h3>Qué tiene la tela</h3>
@@ -450,6 +485,9 @@ footer .slot span{font-size:12px}
     <div class="cierre-texto">
       <h2>Probala en tu peor día de calor</h2>
       <p>Si no te convence, tenés 30 días para cambiarla y 10 días para arrepentirte y, si vuelve sin uso y con etiquetas, te devolvemos el 100%.</p>
+      <figure class="cierre-foto">
+        <img src="/media/producto.jpg" srcset="/media/producto-600.jpg 600w, /media/producto.jpg 900w" sizes="340px" width="900" height="900" loading="lazy" alt="Camisa anti-sudor Vellmont celeste, de frente.">
+      </figure>
     </div>
     <div class="cierre-compra">
       <div class="precio">
