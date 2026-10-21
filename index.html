@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (Google Ads AW-970035452): guarda el clic del anuncio (gclid) en una cookie de vellmont.com.ar
+     para que la compra en tienda.vellmont.com.ar se atribuya al anuncio -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-970035452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-970035452');
+</script>
 <title>Camisa anti-sudor para hombres que transpiran mucho | Vellmont</title>
 <meta name="description" content="Camisa con tela anti-sudor de fibra de bambú. Transpirás lo mismo, pero no se te marca como en una camisa común. También es antimanchas y antiarrugas. Envíos a todo el país.">
 <meta name="theme-color" content="#10213A">
@@ -532,8 +541,14 @@ footer .slot span{font-size:12px}
 (function () {
   var TIENDA = 'https://tienda.vellmont.com.ar';
   /* el botón de compra pasa por vellmont.com.ar/compra, que redirige al producto en la tienda.
-     Si la visita llegó con utm (anuncio), se pasan esos; si no, se marca como tráfico de la landing. */
-  var q = location.search.indexOf('utm_') > -1 ? location.search : '?utm_source=landing&utm_medium=web&utm_campaign=lanzamiento';
+     Se pasan todos los parámetros de la visita (utm y gclid del anuncio); si no trae utm, se marca como tráfico de la landing. */
+  var params = new URLSearchParams(location.search);
+  if (!params.has('utm_source')) {
+    params.set('utm_source', 'landing');
+    params.set('utm_medium', 'web');
+    params.set('utm_campaign', 'lanzamiento');
+  }
+  var q = '?' + params.toString();
   var LINKS = {
     shop: '/compra/' + q,
     contacto: TIENDA + '/contacto/',
@@ -560,6 +575,7 @@ footer .slot span{font-size:12px}
       var data = { event: 'cta_click', cta: a.getAttribute('data-cta'), destino: a.getAttribute('data-link') };
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(data);
+      if (typeof window.gtag === 'function') { window.gtag('event', 'cta_click', { cta: data.cta, destino: data.destino }); }
       if (typeof window.fbq === 'function') { window.fbq('trackCustom', 'ClickCompra', data); }
     });
   });
