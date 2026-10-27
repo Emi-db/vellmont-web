@@ -63,6 +63,7 @@ section[id]{scroll-margin-top:72px}
 .btn--ghost:hover{background:var(--ink);color:#fff}
 .btn--ghost-dark{background:transparent;color:#fff;border:1.5px solid #fff;font-weight:600;font-size:16px;min-height:50px}
 .btn--ghost-dark:hover{background:#fff;color:var(--ink)}
+.btn[hidden]{display:none}
 .btn--sm{min-height:44px;padding:0 18px;font-size:15px;border-radius:7px}
 .nota-cta{font-size:14px;color:var(--muted)}
 
@@ -340,7 +341,8 @@ footer .slot span{font-size:12px}
     </figure>
     <div class="hero-rest">
       <div class="hero-ctas">
-        <a class="btn" href="#" data-link="shop" data-cta="hero">Comprar ahora · $99.000</a>
+        <a class="btn" href="#" data-link="shop" data-cta="hero">Comprar ahora · $120.000</a>
+        <a class="btn btn--ghost" href="#" data-link="ml" data-cta="hero-ml" hidden>También en Mercado Libre</a>
         <p class="nota-cta">Elegí el talle y el color.</p>
       </div>
       <ul class="condiciones" aria-label="Condiciones de compra">
@@ -380,7 +382,7 @@ footer .slot span{font-size:12px}
     <div class="diferencia-texto">
       <h2>Levantá el brazo tranquilo</h2>
       <p>En una camisa común la transpiración se mete en la tela y aparece la aureola. La tela de Vellmont no la absorbe, así que la camisa se ve igual a la mañana que a la tarde.</p>
-      <a class="btn" href="#" data-link="shop" data-cta="diferencia">Comprar ahora · $99.000</a>
+      <a class="btn" href="#" data-link="shop" data-cta="diferencia">Comprar ahora · $120.000</a>
       <p class="nota-cta">3 cuotas sin interés · 15% off por transferencia</p>
     </div>
   </div>
@@ -478,7 +480,7 @@ footer .slot span{font-size:12px}
       </details>
       <details>
         <summary>¿Cómo puedo pagar?</summary>
-        <p>Con tarjeta de crédito en 3 cuotas sin interés de $33.000, con débito, con billetera virtual o por transferencia con 15% de descuento ($84.150). Llevando 2 o más tenés 10% menos (2 camisas: $178.200). El pago se procesa en el checkout seguro de Tiendanube (Pago Nube).</p>
+        <p>Con tarjeta de crédito en 3 cuotas sin interés de $40.000, con débito, con billetera virtual o por transferencia con 15% de descuento ($102.000). Llevando 2 o más tenés 10% menos (2 camisas: $216.000). El pago se procesa en el checkout seguro de Tiendanube (Pago Nube).</p>
       </details>
       <details>
         <summary>Son una marca nueva. ¿Es seguro comprarles?</summary>
@@ -500,8 +502,8 @@ footer .slot span{font-size:12px}
     </div>
     <div class="cierre-compra">
       <div class="precio">
-        <strong>$99.000</strong>
-        <span>3 cuotas sin interés de $33.000 · Envío a todo el país</span>
+        <strong>$120.000</strong>
+        <span>3 cuotas sin interés de $40.000 · Envío a todo el país</span>
       </div>
       <ul class="incluye">
         <li>Camisa anti-sudor, antimanchas y antiarrugas</li>
@@ -510,7 +512,8 @@ footer .slot span{font-size:12px}
         <li>15% off por transferencia · Llevando 2, 10% menos</li>
       </ul>
       <div class="cierre-ctas">
-        <a class="btn" href="#" data-link="shop" data-cta="cierre">Comprar ahora · $99.000</a>
+        <a class="btn" href="#" data-link="shop" data-cta="cierre">Comprar ahora · $120.000</a>
+        <a class="btn btn--ghost-dark" href="#" data-link="ml" data-cta="cierre-ml" hidden>Comprar en Mercado Libre</a>
         <p class="nota-cta">Elegí el talle y el color. ¿Alguna duda? <a href="#" data-link="contacto" data-cta="cierre-contacto">Escribinos</a>.</p>
       </div>
     </div>
@@ -533,7 +536,7 @@ footer .slot span{font-size:12px}
 </footer>
 
 <div class="barra-compra" aria-hidden="true">
-  <div class="barra-precio"><strong>$99.000</strong><small>3 cuotas sin interés · Envío a todo el país</small></div>
+  <div class="barra-precio"><strong>$120.000</strong><small>3 cuotas sin interés · Envío a todo el país</small></div>
   <a class="btn" href="#" data-link="shop" data-cta="barra" tabindex="-1">Comprar ahora</a>
 </div>
 
@@ -553,9 +556,10 @@ footer .slot span{font-size:12px}
     shop: '/compra/' + q,
     contacto: TIENDA + '/contacto/',
     arrepentimiento: TIENDA + '/contacto/?order_cancellation_without_id=true',
-    terminos: TIENDA + '/cambios-y-devoluciones/'
+    terminos: TIENDA + '/cambios-y-devoluciones/',
+    ml: '' /* link de la publicación en Mercado Libre; mientras esté vacío, los botones de ML no se muestran */
   };
-  var external = {};
+  var external = { ml: true };
 
   document.querySelectorAll('[data-link]').forEach(function (a) {
     var key = a.getAttribute('data-link');
@@ -563,6 +567,7 @@ footer .slot span{font-size:12px}
     if (url) {
       a.href = url;
       if (external[key]) { a.target = '_blank'; a.rel = 'noopener'; }
+      a.hidden = false;
     } else {
       a.title = 'Link pendiente: ' + key;
     }
