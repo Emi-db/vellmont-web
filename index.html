@@ -332,8 +332,8 @@ footer .slot span{font-size:12px}
   <div class="wrap">
     <div class="hero-head">
       <span class="para-quien">Para hombres que transpiran mucho</span>
-      <h1><span class="h1-linea">Transpirás igual.</span> <span class="h1-linea">Tu camisa no lo muestra.</span></h1>
-      <p>Una camisa con una tela que no deja la marca del sudor, repele manchas y no se arruga. Para que dejes de pensar cada vez que levantás los brazos.</p>
+      <h1><span class="h1-linea">Ropa Anti Sudor.</span></h1>
+      <p>La tecnología DWR permite que el sudor se evapore completamente antes de que sea visible. Transpirás, y la ropa no se marca nunca.</p>
     </div>
     <figure class="hero-media">
       <video src="/media/prueba.mp4?v=2" poster="/media/prueba-poster.jpg?v=2" autoplay muted loop playsinline preload="metadata" aria-label="Video: a la izquierda una camisa común se moja y se mancha con agua; a la derecha la camisa Vellmont queda seca."></video>
@@ -341,7 +341,7 @@ footer .slot span{font-size:12px}
     </figure>
     <div class="hero-rest">
       <div class="hero-ctas">
-        <a class="btn" href="#" data-link="shop" data-cta="hero">Comprar ahora · $120.000</a>
+        <a class="btn" href="#" data-link="shop" data-cta="hero">Comprar ahora</a>
         <a class="btn btn--ghost" href="#" data-link="ml" data-cta="hero-ml" hidden>También en Mercado Libre</a>
         <p class="nota-cta">Elegí el talle y el color.</p>
       </div>
@@ -536,7 +536,7 @@ footer .slot span{font-size:12px}
 </footer>
 
 <div class="barra-compra" aria-hidden="true">
-  <div class="barra-precio"><strong>$120.000</strong><small>3 cuotas sin interés · Envío a todo el país</small></div>
+  <div class="barra-precio"><small>3 cuotas sin interés · Envío gratis</small></div>
   <a class="btn" href="#" data-link="shop" data-cta="barra" tabindex="-1">Comprar ahora</a>
 </div>
 
@@ -590,19 +590,31 @@ footer .slot span{font-size:12px}
     });
   });
 
-  /* barra fija: se muestra solo si no se ven los botones del hero ni el cierre */
+  /* barra fija: aparece recién cuando la persona llegó a la explicación de la tela (sección "diferencia"),
+     y se oculta mientras se ven los botones del hero o del cierre */
   var bar = document.querySelector('.barra-compra');
   var watched = document.querySelectorAll('.hero-ctas, #comprar');
+  var umbral = document.querySelector('.diferencia');
   if (bar && 'IntersectionObserver' in window) {
     var visible = new Set();
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
-      var on = visible.size === 0;
+    var llego = !umbral;
+    var update = function () {
+      var on = llego && visible.size === 0;
       bar.classList.toggle('is-on', on);
       bar.setAttribute('aria-hidden', on ? 'false' : 'true');
       bar.querySelector('a').tabIndex = on ? 0 : -1;
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      update();
     });
     watched.forEach(function (el) { io.observe(el); });
+    if (umbral) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting || e.boundingClientRect.top < 0) llego = true; });
+        update();
+      }).observe(umbral);
+    }
   } else if (bar) {
     bar.classList.add('is-on');
     bar.setAttribute('aria-hidden', 'false');
