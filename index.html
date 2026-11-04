@@ -336,7 +336,7 @@ footer .slot span{font-size:12px}
       <p>Una camisa con una tela que no deja la marca del sudor, repele manchas y no se arruga. Para que dejes de pensar cada vez que levantás los brazos.</p>
     </div>
     <figure class="hero-media">
-      <video src="/media/prueba.mp4" poster="/media/prueba-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Video: a la izquierda una camisa común se moja y se mancha con agua; a la derecha la camisa Vellmont queda seca."></video>
+      <video src="/media/prueba.mp4?v=2" poster="/media/prueba-poster.jpg?v=2" autoplay muted loop playsinline preload="metadata" aria-label="Video: a la izquierda una camisa común se moja y se mancha con agua; a la derecha la camisa Vellmont queda seca."></video>
       <figcaption>Camisa común vs. Vellmont, con agua encima</figcaption>
     </figure>
     <div class="hero-rest">
@@ -580,7 +580,12 @@ footer .slot span{font-size:12px}
       var data = { event: 'cta_click', cta: a.getAttribute('data-cta'), destino: a.getAttribute('data-link') };
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(data);
-      if (typeof window.gtag === 'function') { window.gtag('event', 'cta_click', { cta: data.cta, destino: data.destino }); }
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'cta_click', { cta: data.cta, destino: data.destino });
+        /* conversiones de Google Ads (clic saliente): ir a la tienda o a Mercado Libre */
+        var SEND_TO = { shop: 'AW-18550858129/tfWACPS01rEdEJHD3o1F', ml: 'AW-18550858129/2nZaCPe01rEdEJHD3o1F' };
+        if (SEND_TO[data.destino]) { window.gtag('event', 'conversion', { send_to: SEND_TO[data.destino], transport_type: 'beacon' }); }
+      }
       if (typeof window.fbq === 'function') { window.fbq('trackCustom', 'ClickCompra', data); }
     });
   });
