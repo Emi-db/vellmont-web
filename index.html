@@ -334,6 +334,30 @@ footer .slot span{font-size:12px}
       <span class="para-quien">Para hombres que transpiran mucho</span>
       <h1><span class="h1-linea">Ropa Anti Sudor.</span></h1>
       <p>La tecnología DWR permite que el sudor se evapore completamente antes de que sea visible. Transpirás, y la ropa no se marca nunca.</p>
+      <script>
+      /* título según lo que buscó la persona: Google Ads manda la palabra clave en utm_term (sufijo de URL de la campaña).
+         Para probar: ?h=arrugas | manchas | bambu */
+      (function () {
+        var p = new URLSearchParams(location.search);
+        var t = (p.get('h') || p.get('utm_term') || '').toLowerCase();
+        var V = [
+          { re: /arrug|planch/, id: 'arrugas', quien: 'Para hombres que no quieren planchar', h1: 'Camisa que no se arruga.',
+            p: 'No se arruga, repele manchas y además no marca el sudor: la tecnología DWR deja que se evapore antes de que sea visible.' },
+          { re: /manch/, id: 'manchas', quien: 'Para hombres que transpiran mucho', h1: 'Camisa antimanchas.',
+            p: 'Repele manchas, no se arruga y no marca el sudor: la tecnología DWR deja que se evapore antes de que sea visible.' },
+          { re: /bamb/, id: 'bambu', quien: 'Para hombres que transpiran mucho', h1: 'Camisa de bambú anti sudor.',
+            p: 'Tela de bambú que no se arruga, repele manchas y no marca el sudor: la tecnología DWR deja que se evapore antes de que sea visible.' }
+        ];
+        var v = null;
+        for (var i = 0; i < V.length; i++) { if (V[i].re.test(t)) { v = V[i]; break; } }
+        window.VELLMONT_HERO = v ? v.id : 'sudor';
+        if (!v) return;
+        var head = document.currentScript.parentNode;
+        head.querySelector('.para-quien').textContent = v.quien;
+        head.querySelector('.h1-linea').textContent = v.h1;
+        head.querySelector('p').textContent = v.p;
+      })();
+      </script>
     </div>
     <figure class="hero-media">
       <video src="/media/prueba.mp4?v=2" poster="/media/prueba-poster.jpg?v=2" autoplay muted loop playsinline preload="metadata" aria-label="Video: a la izquierda una camisa común se moja y se mancha con agua; a la derecha la camisa Vellmont queda seca."></video>
@@ -577,11 +601,11 @@ footer .slot span{font-size:12px}
      Los toma Google Tag Manager (dataLayer) y el Pixel de Meta si están instalados. */
   document.querySelectorAll('[data-cta]').forEach(function (a) {
     a.addEventListener('click', function () {
-      var data = { event: 'cta_click', cta: a.getAttribute('data-cta'), destino: a.getAttribute('data-link') };
+      var data = { event: 'cta_click', cta: a.getAttribute('data-cta'), destino: a.getAttribute('data-link'), hero: window.VELLMONT_HERO || 'sudor' };
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(data);
       if (typeof window.gtag === 'function') {
-        window.gtag('event', 'cta_click', { cta: data.cta, destino: data.destino });
+        window.gtag('event', 'cta_click', { cta: data.cta, destino: data.destino, hero: data.hero });
         /* conversiones de Google Ads (clic saliente): ir a la tienda o a Mercado Libre */
         var SEND_TO = { shop: 'AW-18550858129/tfWACPS01rEdEJHD3o1F', ml: 'AW-18550858129/2nZaCPe01rEdEJHD3o1F' };
         if (SEND_TO[data.destino]) { window.gtag('event', 'conversion', { send_to: SEND_TO[data.destino], transport_type: 'beacon' }); }
